@@ -8,39 +8,47 @@ import { getLocations, isNameValid } from "./mock-api/apis";
 
 
 function App() {
-
+    //state of name text input field
     const [name, setName] = useState("");
     
+    //state of country select field and options being loaded
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
 
+    //state of users being added. As inputs are generated, list can pull in new additions
     const [users, setUsers] = useState([]);
 
-
+    //variables for pagination for organization purposes
     const [page, setPage] = useState(0);
     const pageSize = 5;
     const pageCount = Math.ceil(users.length / pageSize);
     const pageUsers = users.slice(page * pageSize, (page + 1) * pageSize);
 
+    //get list of countries from mock-api/apis.js
     useEffect(() => {
         getLocations().then((countries) => {
             setCountries(countries);
         });
     }, []);
 
+    //handle name input change
     function handleNameChange(event) {
         setName(event.target.value);
     }
 
+    //handle country select change
     function handleCountryChange(event) {
         setSelectedCountry(event.target.value);
     }
 
+    //clear inputs on clear button click
     const clearInputs = () => {
         setName("");
         setSelectedCountry("");
     }
 
+    //handle add button click
+    //check if name and country have values, name is valid, and name not already in list
     const handleAddClick = () => {
         if(!selectedCountry) {
             alert("Please select a country");
@@ -54,8 +62,6 @@ function App() {
             alert("Please enter a valid name");
             return;
         }
-
-
         //user with same name cannot be from the same country
         if(users.filter(user => user.name === name).length > 0 && users.filter(user => user.location === selectedCountry).length > 0) {
             alert("Cannot add duplicate name from same country");
@@ -72,10 +78,11 @@ function App() {
           <h1>Liam van Leynseele Solution</h1>
         </header>
 
+        {/* code for user input fields: */}
         <div>
             <div style={{padding: "2px"}}>
                 <label htmlFor="name" style={{padding: "2px"}}>Name:</label>
-                <input type="text" style={{padding: "2px"}} id="name" name="name" value={name} onChange={handleNameChange} />
+                <input type="text" style={{padding: "2px", width: "250px"}} id="name" name="name" value={name} onChange={handleNameChange} />
             </div>
 
             <div style={{padding: "2px"}}>
@@ -89,17 +96,19 @@ function App() {
                     ))}
                 </select>
             </div>
-            
-            <button onClick={clearInputs}>Clear</button>
-            <button onClick={handleAddClick}>Add</button>
+            <div style={{display: "flex", justifyContent: "center", gap: "10px"}}>
+              <button onClick={clearInputs}>Clear</button>
+              <button onClick={handleAddClick}>Add</button>
+            </div>
         </div>
-
         <br></br>
+
+        {/* code for table of users: */}
         <div style={{justifyContent: "center"}}>
             <table style={{ width: "400px", border: "2px solid black", borderCollapse: "collapse", margin: "0 auto" }}>
                 <thead style={{border: "1px solid black", margin: "0 auto"}}>
                     <tr>
-                        <th>Name</th>
+                        <th style={{borderRight: "1px solid black"}}>Name</th>
                         <th>Location</th>
                     </tr>
                 </thead>

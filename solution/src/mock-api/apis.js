@@ -12,8 +12,7 @@ export const isNameValid = (name) => new Promise((resolve) => {
  */
 export const getLocations = () => Promise.resolve(['Canada', 'China', 'USA', 'Brazil']);
 
-
-
+// some fake users for testing purposes
 let fakeUsers = [
     {name: 'John', location: 'Canada'},
     {name: 'Jane', location: 'China'},
@@ -24,8 +23,8 @@ let fakeUsers = [
     {name: 'Ben', location: 'USA'},
 ];
 
-export const getUsers = () => Promise.resolve(users);
+export const getUsers = () => Promise.resolve(fakeUsers);
 
 export function addUser(user) {
-    users.push(user);
+    fakeUsers.push(user);
 }
