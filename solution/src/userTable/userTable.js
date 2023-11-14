@@ -1,20 +1,16 @@
 
 import React, { useState, useEffect } from "react";
 import { getUsers } from "../mock-api/apis";
+import { UserContext } from "../App";
 
 function UserTable() {
-    const [users, setUsers] = useState([]);
     const [page, setPage] = useState(0);
 
-    useEffect(() => {
-        getUsers().then((users) => {
-            setUsers(users);
-        });
-    }, []);
+    const allUsers = React.useContext(UserContext);
 
     const pageSize = 5;
-    const pageCount = Math.ceil(users.length / pageSize);
-    const pageUsers = users.slice(page * pageSize, (page + 1) * pageSize);
+    const pageCount = Math.ceil(allUsers.length / pageSize);
+    const pageUsers = allUsers.slice(page * pageSize, (page + 1) * pageSize);
 
     return (
         <div style={{justifyContent: "center"}}>
@@ -33,11 +29,9 @@ function UserTable() {
                         </tr>
                     ))}
                 </tbody>
-                
             </table>
             <div>
                 {Array.from({ length: pageCount }, (_, i) => (
-
                     <button key={i} onClick={() => setPage(i)}>
                         {i + 1}
                     </button>

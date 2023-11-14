@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { getLocations, isNameValid, addUser } from "../mock-api/apis";
-import UsersContext from "../App";
+import UsersContext from "../App"
 
 
-function InputUser() {
+const UserContext = React.createContext([]);
+
+
+export function InputUser() {
     const [name, setName] = useState("");
     
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
 
-    const { users, setUsers } = React.useContext(UsersContext);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getLocations().then((countries) => {
@@ -45,7 +48,7 @@ function InputUser() {
         }
 
         console.log(`Name: ${name}, Country: ${selectedCountry}`);
-        addUser({'name': name, 'location': selectedCountry});
+        setUsers([...users, {'name': name, 'location': selectedCountry}]);
     }
 
     return(
