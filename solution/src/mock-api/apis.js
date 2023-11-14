@@ -14,7 +14,7 @@ export const getLocations = () => Promise.resolve(['Canada', 'China', 'USA', 'Br
 
 
 
-let users = [
+let fakeUsers = [
     {name: 'John', location: 'Canada'},
     {name: 'Jane', location: 'China'},
     {name: 'Bob', location: 'USA'},
