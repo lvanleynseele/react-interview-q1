@@ -26,8 +26,6 @@ let users = [
 
 export const getUsers = () => Promise.resolve(users);
 
-
 export function addUser(user) {
-    
     users.push(user);
 }

@@ -4,19 +4,31 @@ import InputUser from './userInput/inputUser';
 import UserTable from './userTable/userTable';
 import React, { useState, useEffect } from "react";
 
+
 export const UserContext = React.createContext([]);
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <h1>Liam van Leynseele Solution</h1>
-      </header>
-      <InputUser />
-      <br></br>
-      <UserTable />
+    <UserContext.Provider value={[
+      {name: 'John', location: 'Canada'},
+    {name: 'Jane', location: 'China'},
+    {name: 'Bob', location: 'USA'},
+    {name: 'Bill', location: 'Brazil'},
+    {name: 'Joe', location: 'Canada'},
+    {name: 'Jill', location: 'China'},
+    {name: 'Ben', location: 'USA'},
 
-    </div>
+    ]}>
+      <div className="App">
+        <header>
+          <h1>Liam van Leynseele Solution</h1>
+        </header>
+        <InputUser />
+        <br></br>
+        <UserTable />
+
+      </div>
+    </UserContext.Provider>
   );
 }
 
