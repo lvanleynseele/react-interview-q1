@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getLocations, isNameValid, addUser } from "../mock-api/apis";
 import UsersContext from "../App"
 
-function InputUser() {
+
+const UserContext = React.createContext([]);
+
+
+export function InputUser() {
     const [name, setName] = useState("");
     
     const [countries, setCountries] = useState([]);
